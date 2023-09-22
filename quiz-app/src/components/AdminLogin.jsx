@@ -36,7 +36,7 @@ const AdminLogin = ({ admin, setAdmin }) => {
     }
     if (admin) {
         return (
-            <AdminDashboard />
+            <AdminDashboard admin={admin} />
         )
     }
 
