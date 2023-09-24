@@ -1,25 +1,26 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import firebase from 'firebase/compat/app'
 
 import { initializeApp } from "firebase/app";
 import { addDoc, collection, getDoc, getDocs, getFirestore, query, where } from "firebase/firestore";
 import { firebaseConfig as conf, app } from '../../firebase';
+import QuizSetter from './QuizSetter';
 
 
 const firestore = getFirestore(app);
 
+const getAdminID = async () => {
+    const adminRef = collection(firestore, "Admins")
+    const adminQuery = query(adminRef, where("email", "==", `${admin.email}`));
+
+    const queryResults = await getDocs(adminQuery);
+    return queryResults.docs[0].id;
+}
 
 const AdminDashboard = ({ admin }) => {
-    console.log(admin.email)
 
+    const [quiz, setQuiz] = useState(false);
 
-    const getAdminID = async () => {
-        const adminRef = collection(firestore, "Admins")
-        const adminQuery = query(adminRef, where("email", "==", `${admin.email}`));
-
-        const queryResults = await getDocs(adminQuery);
-        return queryResults.docs[0].id;
-    }
 
     const addAdmin = async () => {
 
@@ -43,11 +44,7 @@ const AdminDashboard = ({ admin }) => {
 
     const addQuiz = async () => {
 
-
-        const quiz = await addDoc(collection(firestore, `Admins/${await getAdminID()}/Quizes`), {
-            owner: admin.email,
-            name: "quizyquiz",
-        })
+        setQuiz(true);
         console.log(quiz)
 
     }
@@ -58,14 +55,22 @@ const AdminDashboard = ({ admin }) => {
     }, [])
 
 
+    if (quiz == false) {
 
-    return (
-        <>
-            <h1>AdminDashboard</h1>
-            <button onClick={() => addQuiz()}>Create Quiz Doc</button>
-            <button onClick={() => addAdmin()}>Add Admin</button>
-        </>
-    )
+        return (
+            <>
+                <h1>AdminDashboard</h1>
+                <button onClick={() => addQuiz()}>Create Quiz </button>
+                <button onClick={() => addAdmin()}>Add Admin</button>
+            </>
+        )
+    }
+    else {
+        return <QuizSetter admin={admin} />
+    }
+
 }
 
 export default AdminDashboard
+
+export { getAdminID };
