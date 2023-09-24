@@ -9,13 +9,7 @@ import QuizSetter from './QuizSetter';
 
 const firestore = getFirestore(app);
 
-const getAdminID = async () => {
-    const adminRef = collection(firestore, "Admins")
-    const adminQuery = query(adminRef, where("email", "==", `${admin.email}`));
 
-    const queryResults = await getDocs(adminQuery);
-    return queryResults.docs[0].id;
-}
 
 const AdminDashboard = ({ admin }) => {
 
@@ -72,5 +66,3 @@ const AdminDashboard = ({ admin }) => {
 }
 
 export default AdminDashboard
-
-export { getAdminID };

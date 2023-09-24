@@ -1,16 +1,43 @@
-import React, { useRef, useState } from 'react';
-import { getAdminID } from './AdminDashboard';
+import React, { useEffect, useRef, useState } from 'react';
+import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
+import { app } from '../../firebase';
+
+
+
+
+
+
 
 const QuizSetter = ({ admin }) => {
+    const getAdminID = async () => {
+        const adminRef = collection(firestore, "Admins")
+        const adminQuery = query(adminRef, where("email", "==", `${admin.email}`));
+
+        const queryResults = await getDocs(adminQuery);
+        return queryResults.docs[0].id;
+    }
+
     const [questionsCount, setQuestionsCount] = useState(0);
     const qCount = useRef(0);
 
+
+    const firestore = getFirestore(app)
+
+
     const createQuiz = async () => {
+
+
         const quiz = await addDoc(collection(firestore, `Admins/${await getAdminID()}/Quizes`), {
             owner: admin.email,
-            name: "quizyquiz",
+            name: "lordApoorav",
         });
+        console.log("quiz is created")
     }
+
+    useEffect(() => {
+        createQuiz();
+    }, [])
 
     if (questionsCount <= 0) {
         return (
