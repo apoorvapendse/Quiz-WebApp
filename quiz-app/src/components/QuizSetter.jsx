@@ -60,6 +60,7 @@ const QuizSetter = ({ admin }) => {
                 const quizDetails = quizDocSnapshot.data();
                 console.log(quizDetails);
 
+                console.log("Questions before data:", questions)
                 const data = {
                     ...quizDetails,
                     ...questions,
@@ -78,7 +79,7 @@ const QuizSetter = ({ admin }) => {
 
     }
 
-    const updateForm = (e) => {
+    const updateForm = async (e) => {
         e.preventDefault();
         const form = document.getElementById('my-form')
 
@@ -114,12 +115,17 @@ const QuizSetter = ({ admin }) => {
                 }
             }
         });
+
         setQuestions([...allQuestions])
-        addQuestionsToQuiz();
 
 
     }
 
+    useEffect(() => {
+        if (questions.length > 0) {
+            addQuestionsToQuiz();
+        }
+    }, [questions]);
 
 
     if (questionsCount <= 0) {
