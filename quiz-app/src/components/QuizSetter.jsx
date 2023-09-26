@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore';
 import { getFirestore } from 'firebase/firestore';
 import { app } from '../../firebase';
 
@@ -10,22 +10,20 @@ import { app } from '../../firebase';
 
 
 const QuizSetter = ({ admin }) => {
-    const getAdminID = async () => {
-        const adminRef = collection(firestore, "Admins")
-        const adminQuery = query(adminRef, where("email", "==", `${admin.email}`));
-
-        const queryResults = await getDocs(adminQuery);
-        return queryResults.docs[0].id;
-    }
 
     const [questionsCount, setQuestionsCount] = useState(0);
     const [quizName, setQuizName] = useState("");
     const [questions, setQuestions] = useState([])
+    const [quizID, setQuizID] = useState();
     const qCount = useRef(0);
     const qName = useRef("");
 
 
     const firestore = getFirestore(app)
+
+    useEffect(() => {
+        console.log(quizID); // This will show the updated value of quizID
+    }, [quizID]); // This useEffect will run when quizID changes
 
 
     const createQuiz = async () => {
@@ -35,63 +33,94 @@ const QuizSetter = ({ admin }) => {
             name: qName.current,
             totalQuestions: qCount.current
         });
-        console.log("quiz is created")
+
+        console.log(quiz.id)
+        setQuizID(quiz.id);
         setQuizName(qName.current)
         setQuestionsCount(qCount.current)
+    }
+
+    const getAdminID = async () => {
+        const adminRef = collection(firestore, "Admins")
+        console.log(quizID)
+        const adminQuery = query(adminRef, where("email", "==", `${admin.email}`));
+
+        const queryResults = await getDocs(adminQuery);
+        return queryResults.docs[0].id;
+    }
+
+    // used to add questions to firestore after clicking on submit questionaire
+    const addQuestionsToQuiz = async () => {
+        const adminID = await getAdminID();
+        try {
+            const quizDocRef = doc(firestore, `Admins/${adminID}/Quizes`, quizID);
+            const quizDocSnapshot = await getDoc(quizDocRef);
+
+            if (quizDocSnapshot.exists()) {
+                const quizDetails = quizDocSnapshot.data();
+                console.log(quizDetails);
+
+                const data = {
+                    ...quizDetails,
+                    ...questions,
+                }
+                console.log("data:", data)
+
+                const updatedQuiz = await setDoc(quizDocRef, data)
+                console.log(updatedQuiz);
+
+            } else {
+                console.log("Quiz not found");
+            }
+        } catch (error) {
+            console.error("Error getting quiz details:", error);
+        }
+
     }
 
     const updateForm = (e) => {
         e.preventDefault();
         const form = document.getElementById('my-form')
 
-        // 👇️ if you can't add an `id` to the form
-        // const form = document.querySelector('form');
-        let i = 1;
-        const currentQuestion = {}
-        const allQuestions = []
+        //the below loop creates a currentQuestion object having size props and pushes it into the allQuestions array
+        // Create an array to hold all the questions
+        const allQuestions = [];
+
         Array.from(form.elements).forEach((element, index) => {
-
-            const value = element.value
-            switch (index % 6) {
-                case 0:
-                    currentQuestion.content = element.value
-                    break;
-
-                case 1:
-                    currentQuestion.option1 = element.value
-                    break;
-                case 2:
-                    currentQuestion.option2 = element.value
-                    break;
-                case 3:
-                    currentQuestion.option3 = element.value
-                    break;
-                case 4:
-                    currentQuestion.option4 = element.value
-                    break;
-                case 5:
-                    currentQuestion.correctOption = element.value;
-                    allQuestions.push(currentQuestion)
-                    console.log(currentQuestion.content)
-
-                    break;
-
-
-
+            if (index % 6 === 0) {
+                // Create a new question object for each question
+                const currentQuestion = {};
+                currentQuestion.content = element.value;
+                allQuestions.push(currentQuestion);
+            } else {
+                // Update the current question object's options and correctOption
+                const currentQuestion = allQuestions[allQuestions.length - 1];
+                switch (index % 6) {
+                    case 1:
+                        currentQuestion.option1 = element.value;
+                        break;
+                    case 2:
+                        currentQuestion.option2 = element.value;
+                        break;
+                    case 3:
+                        currentQuestion.option3 = element.value;
+                        break;
+                    case 4:
+                        currentQuestion.option4 = element.value;
+                        break;
+                    case 5:
+                        currentQuestion.correctOption = element.value;
+                        break;
+                }
             }
-
-
-
-
-
         });
         setQuestions([...allQuestions])
+        addQuestionsToQuiz();
+
 
     }
 
-    useEffect(() => {
-        //createQuiz();
-    }, [])
+
 
     if (questionsCount <= 0) {
         return (
@@ -128,7 +157,7 @@ const QuizSetter = ({ admin }) => {
                         {questionsArray.map((item, i) => (
                             <div key={i}>
                                 <h1 >Question{i + 1}</h1>
-                                <textarea name="" id="" cols="90" rows="3"></textarea>
+                                <input type='text' style={{ width: "80vw", height: "7vh" }}></input>
                                 <br />
                                 <input type="text" placeholder="Enter option value" />
                                 <br />
