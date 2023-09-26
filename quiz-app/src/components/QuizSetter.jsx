@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { addDoc, collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore';
 import { getFirestore } from 'firebase/firestore';
 import { app } from '../../firebase';
+import { useNavigate } from 'react-router-dom';
+import FinalScreen from './FinalScreen';
 
 //this is where the options are set and then questions are rendered
 
@@ -15,8 +17,10 @@ const QuizSetter = ({ admin }) => {
     const [quizName, setQuizName] = useState("");
     const [questions, setQuestions] = useState([])
     const [quizID, setQuizID] = useState();
+    const [adminID, setAdminID] = useState();
     const qCount = useRef(0);
     const qName = useRef("");
+    const [isQuizUpdated, setIsQuizUpdated] = useState(false);
 
 
     const firestore = getFirestore(app)
@@ -46,12 +50,15 @@ const QuizSetter = ({ admin }) => {
         const adminQuery = query(adminRef, where("email", "==", `${admin.email}`));
 
         const queryResults = await getDocs(adminQuery);
+
         return queryResults.docs[0].id;
+
     }
 
     // used to add questions to firestore after clicking on submit questionaire
     const addQuestionsToQuiz = async () => {
         const adminID = await getAdminID();
+        setAdminID(adminID);
         try {
             const quizDocRef = doc(firestore, `Admins/${adminID}/Quizes`, quizID);
             const quizDocSnapshot = await getDoc(quizDocRef);
@@ -69,6 +76,7 @@ const QuizSetter = ({ admin }) => {
 
                 const updatedQuiz = await setDoc(quizDocRef, data)
                 console.log(updatedQuiz);
+                setIsQuizUpdated(true)
 
             } else {
                 console.log("Quiz not found");
@@ -127,6 +135,9 @@ const QuizSetter = ({ admin }) => {
         }
     }, [questions]);
 
+    if (isQuizUpdated) {
+        return <FinalScreen adminID={adminID} quizID={quizID} />
+    }
 
     if (questionsCount <= 0) {
         return (
