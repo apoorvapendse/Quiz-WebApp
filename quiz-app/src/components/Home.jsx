@@ -10,7 +10,13 @@ const Home = () => {
                     Admin
                 </Link>
             </button>
-            <button>Give Quiz</button>
+            <button>
+                <Link to={'/user/auth'}>
+                    Give Quiz
+                </Link>
+
+
+            </button>
 
         </div>
     )
