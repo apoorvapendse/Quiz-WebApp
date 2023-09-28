@@ -68,6 +68,7 @@ const QuizSetter = ({ admin }) => {
                 console.log(quizDetails);
 
                 console.log("Questions before data:", questions)
+                questions.splice(questions.length - 1, 1);
                 const data = {
                     ...quizDetails,
                     ...questions,
