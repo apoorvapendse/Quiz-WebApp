@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import firebase from 'firebase/compat/app'
 
-import { initializeApp } from "firebase/app";
 import { addDoc, collection, getDoc, getDocs, getFirestore, query, where } from "firebase/firestore";
 import { firebaseConfig as conf, app } from '../../firebase';
 import QuizSetter from './QuizSetter';
@@ -26,7 +25,7 @@ const AdminDashboard = ({ admin }) => {
 
 
     const [attempterCount, setAttempterCount] = useState([])
-
+    //responsible for third column in the table
     const getAttemptersLength = async () => {
 
 
@@ -64,7 +63,7 @@ const AdminDashboard = ({ admin }) => {
         setAdminID(queryResults.docs[0].id);
 
     }
-
+    //responsible for first and second columns in the table
     const getPreviousQuizes = async (adminID) => {
         const quizRef = collection(firestore, `Admins/${adminID}/Quizes`);
         const previousQuizesCollection = await getDocs(quizRef);
@@ -128,7 +127,7 @@ const AdminDashboard = ({ admin }) => {
                 <button onClick={() => addQuiz()}>Create Quiz </button>
                 <button onClick={() => addAdmin()}>Add Admin</button>
 
-                <DashBoardTable attempterCount={attempterCount} prevQuizes={previousQuizes} />
+                <DashBoardTable attempterCount={attempterCount} prevQuizes={previousQuizes} adminID={adminID} quizIDs={previousQuizIds} />
 
             </>
         )

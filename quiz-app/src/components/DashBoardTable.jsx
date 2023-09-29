@@ -3,11 +3,11 @@ import './styles/DashBoardTable.css'
 import { collection, getDoc, getDocs, getFirestore } from 'firebase/firestore'
 import { app } from '../../firebase'
 
-const DashBoardTable = ({ attempterCount, prevQuizes }) => {
+const DashBoardTable = ({ attempterCount, prevQuizes, adminID, quizIDs }) => {
 
 
 
-    console.log(attempterCount, prevQuizes)
+    console.log(quizIDs)
 
 
 
@@ -25,6 +25,7 @@ const DashBoardTable = ({ attempterCount, prevQuizes }) => {
                     <th>Quiz Name</th>
                     <th>Total Questions</th>
                     <th>Total Attempters</th>
+                    <th>Quiz Code</th>
                 </tr>
                 {prevQuizes.map((item, index) =>
 
@@ -32,6 +33,11 @@ const DashBoardTable = ({ attempterCount, prevQuizes }) => {
                         <td>{item.name}</td>
                         <td>{item.totalQuestions}</td>
                         <td>{attempterCount[index]}</td>
+                        <td><button onClick={() => {
+                            navigator.clipboard.writeText(`${adminID}|${quizIDs[index]}`)
+                            alert("Quiz Code Copied to clipboard")
+                        }}
+                        >Copy</button></td>
 
                     </tr>
                 )}
