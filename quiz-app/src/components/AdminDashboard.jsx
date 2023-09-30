@@ -19,7 +19,6 @@ const AdminDashboard = ({ admin }) => {
 
 
 
-
     const [adminID, setAdminID] = useState();
 
 
@@ -30,7 +29,7 @@ const AdminDashboard = ({ admin }) => {
 
 
         const prevPlayerCountPerQuiz = []
-        previousQuizIds.forEach(async (item) => {
+        previousQuizIds.forEach(async (item, index) => {
 
 
 
@@ -40,7 +39,9 @@ const AdminDashboard = ({ admin }) => {
             prevPlayerCountPerQuiz.push(prevAttempters.docs.length)
 
             setAttempterCount(prevPlayerCountPerQuiz)
-            console.log(attempterCount)
+
+            // console.log(attempterCount)
+
 
 
         })
