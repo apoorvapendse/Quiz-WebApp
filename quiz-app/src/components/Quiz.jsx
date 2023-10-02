@@ -13,8 +13,11 @@ const firestore = getFirestore(app)
 const Quiz = ({ user, quizObj, adminID, quizID }) => {
     const [questionsArray, setQuestionsArray] = useState([]);
     const [quizAtempted, setQuizAttempted] = useState(false);
-    const [selectedOptions, setSelectedOptions] = useState([]); // State to store selected options
+    const [selectedOptions, setSelectedOptions] = useState([]);
     const quizScore = useRef(0);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
+
 
     useEffect(() => {
         const questions = [];
@@ -36,6 +39,17 @@ const Quiz = ({ user, quizObj, adminID, quizID }) => {
         setSelectedOptions(updatedSelectedOptions);
     };
 
+    const goToNextQuestion = () => {
+        if (currentQuestionIndex < questionsArray.length - 1) {
+            setCurrentQuestionIndex(currentQuestionIndex + 1);
+        }
+    };
+
+    const goToPrevQuestion = () => {
+        if (currentQuestionIndex > 0) {
+            setCurrentQuestionIndex(currentQuestionIndex - 1);
+        }
+    };
 
     async function submitHandler(e) {
         e.preventDefault();
@@ -74,55 +88,63 @@ const Quiz = ({ user, quizObj, adminID, quizID }) => {
     return (
         <>
             <h1>Quiz</h1>
-            <form onSubmit={submitHandler}>
-                {questionsArray.map((item, index) => (
-                    <div key={index}>
-                        <h3>Question {index + 1}</h3>
-                        <p>{item.content}</p>
+            <form onSubmit={submitHandler} style={{ height: "100vh", width: "100vw", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+                {currentQuestionIndex >= 0 && currentQuestionIndex < questionsArray.length && (
+                    <div key={currentQuestionIndex}>
+                        <h3>Question {currentQuestionIndex + 1}</h3>
+                        <p>{questionsArray[currentQuestionIndex].content}</p>
                         <div className="question">
                             <label>
                                 <input
                                     type="radio"
-                                    name={`option${index}`}
+                                    name={`option${currentQuestionIndex}`}
                                     value="option1"
-                                    onChange={() => handleOptionSelect(index, "option1")}
+                                    onChange={() => handleOptionSelect(currentQuestionIndex, "option1")}
+                                    checked={selectedOptions[currentQuestionIndex] === "option1"}
                                 />{" "}
-                                {item.option1}
+                                {questionsArray[currentQuestionIndex].option1}
                             </label>
                             <br />
                             <label>
                                 <input
                                     type="radio"
-                                    name={`option${index}`}
+                                    name={`option${currentQuestionIndex}`}
                                     value="option2"
-                                    onChange={() => handleOptionSelect(index, "option2")}
+                                    onChange={() => handleOptionSelect(currentQuestionIndex, "option2")}
+                                    checked={selectedOptions[currentQuestionIndex] === "option2"}
                                 />{" "}
-                                {item.option2}
+                                {questionsArray[currentQuestionIndex].option2}
                             </label>
                             <br />
                             <label>
                                 <input
                                     type="radio"
-                                    name={`option${index}`}
+                                    name={`option${currentQuestionIndex}`}
                                     value="option3"
-                                    onChange={() => handleOptionSelect(index, "option3")}
+                                    onChange={() => handleOptionSelect(currentQuestionIndex, "option3")}
+                                    checked={selectedOptions[currentQuestionIndex] === "option3"}
                                 />{" "}
-                                {item.option3}
+                                {questionsArray[currentQuestionIndex].option3}
                             </label>
                             <br />
                             <label>
                                 <input
                                     type="radio"
-                                    name={`option${index}`}
+                                    name={`option${currentQuestionIndex}`}
                                     value="option4"
-                                    onChange={() => handleOptionSelect(index, "option4")}
+                                    onChange={() => handleOptionSelect(currentQuestionIndex, "option4")}
+                                    checked={selectedOptions[currentQuestionIndex] === "option4"}
                                 />{" "}
-                                {item.option4}
+                                {questionsArray[currentQuestionIndex].option4}
                             </label>
                         </div>
                         <hr />
                     </div>
-                ))}
+                )}
+                <div style={{ display: "flex", justifyContent: "space-between", width: "5%" }}>
+                    <button onClick={goToPrevQuestion} disabled={currentQuestionIndex === 0} type='button'>prev</button>
+                    <button onClick={goToNextQuestion} disabled={currentQuestionIndex === questionsArray.length - 1} type='button'>next</button>
+                </div>
                 <button type='submit' style={{ margin: "10px", padding: "10px" }}>Submit answers</button>
             </form>
         </>
