@@ -87,7 +87,7 @@ const Quiz = ({ user, quizObj, adminID, quizID }) => {
     }
     return (
         <>
-            <h1>Quiz</h1>
+            <h1 className='text-3xl font-bold underline'>Quiz</h1>
             <form onSubmit={submitHandler} style={{ height: "100vh", width: "100vw", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
                 {currentQuestionIndex >= 0 && currentQuestionIndex < questionsArray.length && (
                     <div key={currentQuestionIndex}>
@@ -142,8 +142,8 @@ const Quiz = ({ user, quizObj, adminID, quizID }) => {
                     </div>
                 )}
                 <div style={{ display: "flex", justifyContent: "space-between", width: "5%" }}>
-                    <button onClick={goToPrevQuestion} disabled={currentQuestionIndex === 0} type='button'>prev</button>
-                    <button onClick={goToNextQuestion} disabled={currentQuestionIndex === questionsArray.length - 1} type='button'>next</button>
+                    <button onClick={goToPrevQuestion} disabled={currentQuestionIndex === 0} type='button' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  rounded'>prev</button>
+                    <button onClick={goToNextQuestion} disabled={currentQuestionIndex === questionsArray.length - 1} type='button' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  rounded'>next</button>
                 </div>
                 <button type='submit' style={{ margin: "10px", padding: "10px" }}>Submit answers</button>
             </form>
