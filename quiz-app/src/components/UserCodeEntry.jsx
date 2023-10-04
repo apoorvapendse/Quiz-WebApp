@@ -46,8 +46,8 @@ const UserCodeEntry = ({ user }) => {
         return (
             <div style={{ height: "100vh", width: "100vw", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
                 <h1>Enter Code</h1>
-                <input type="text" placeholder='Enter the quiz code' />
-                <button onClick={getQuiz}>Enter Quiz</button>
+                <input type="text" placeholder='Enter the quiz code' className='text-center border-2 border-green-500 w-3/12' />
+                <button onClick={getQuiz} className=' p-2 bg-sky-500 text-emerald-50 font-bold hover:opacity-70 m-2'>Enter Quiz</button>
             </div>
         )
     }

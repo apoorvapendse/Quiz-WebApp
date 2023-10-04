@@ -90,9 +90,9 @@ const Quiz = ({ user, quizObj, adminID, quizID }) => {
             <h1 className='text-3xl font-bold underline'>Quiz</h1>
             <form onSubmit={submitHandler} style={{ height: "100vh", width: "100vw", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
                 {currentQuestionIndex >= 0 && currentQuestionIndex < questionsArray.length && (
-                    <div key={currentQuestionIndex}>
-                        <h3>Question {currentQuestionIndex + 1}</h3>
-                        <p>{questionsArray[currentQuestionIndex].content}</p>
+                    <div key={currentQuestionIndex} className='m-10'>
+                        <h3 className=' font-extrabold  text-2xl'>Question {currentQuestionIndex + 1}</h3>
+                        <p className=' text-xl'>{questionsArray[currentQuestionIndex].content}</p>
                         <div className="question">
                             <label>
                                 <input
@@ -141,11 +141,11 @@ const Quiz = ({ user, quizObj, adminID, quizID }) => {
                         <hr />
                     </div>
                 )}
-                <div style={{ display: "flex", justifyContent: "space-between", width: "5%" }}>
+                <div className="flex justify-between border-red-950  w-40 h-17" >
                     <button onClick={goToPrevQuestion} disabled={currentQuestionIndex === 0} type='button' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  rounded'>prev</button>
                     <button onClick={goToNextQuestion} disabled={currentQuestionIndex === questionsArray.length - 1} type='button' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  rounded'>next</button>
                 </div>
-                <button type='submit' style={{ margin: "10px", padding: "10px" }}>Submit answers</button>
+                <button type='submit' className=' p-3 rounded-sm  m-5 bg-cyan-300'>Submit answers</button>
             </form>
         </>
     );
