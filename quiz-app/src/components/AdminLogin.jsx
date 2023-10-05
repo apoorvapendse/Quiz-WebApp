@@ -46,7 +46,7 @@ const AdminLogin = ({ admin, setAdmin }) => {
                 <label className="switch">
                     <input type="checkbox" className="toggle" />
                     <span className="slider"></span>
-                    <span className="card-side"></span>
+                    <span className="card-side after:before:text-white"></span>
                     <div className="flip-card__inner">
                         <div className="flip-card__front">
                             <div className="title">Log in</div>
