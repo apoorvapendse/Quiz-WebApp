@@ -1,6 +1,6 @@
 .wrapper {
   --input-focus: #2d8cf0;
-  --font-color: #323232;
+  --font-color: white;
   --font-color-sub: #666;
   --bg-color: #fff;
   --bg-color-alt: #666;
@@ -130,7 +130,7 @@
   justify-content: center;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  background: lightgrey;
+  background: #635985;
   gap: 20px;
   border-radius: 5px;
   border: 2px solid var(--main-color);
@@ -154,7 +154,7 @@
   font-size: 25px;
   font-weight: 900;
   text-align: center;
-  color: var(--main-color);
+  color: #393053;
 }
 
 .flip-card__input {
@@ -166,7 +166,7 @@
   box-shadow: 4px 4px var(--main-color);
   font-size: 15px;
   font-weight: 600;
-  color: var(--font-color);
+  color: #393053;
   padding: 5px 10px;
   outline: none;
 }
@@ -196,6 +196,6 @@
   box-shadow: 4px 4px var(--main-color);
   font-size: 17px;
   font-weight: 600;
-  color: var(--font-color);
+  color: #393053;
   cursor: pointer;
 }

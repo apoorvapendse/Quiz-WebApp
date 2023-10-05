@@ -140,13 +140,17 @@ const QuizSetter = ({ admin }) => {
         return <FinalScreen adminID={adminID} quizID={quizID} />
     }
 
+    const inputStyle = 'w-80 m-2 bg-purple border foucs:outline-none text-white border-gray-300 text-sm rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white'
+
     if (questionsCount <= 0) {
         return (
-            <div>
+            <div className='flex h-screen flex-col justify-center items-center align-content-center h-'>
 
-                <input type="number" onChange={(e) => qCount.current = +e.target.value} placeholder='Select Question Count' required />
-                <input type="text" onChange={(e) => qName.current = e.target.value} placeholder='Enter Quiz Name' required />
+                <input type="number" onChange={(e) => qCount.current = +e.target.value} placeholder='Select Question Count' className="w-80 m-3 bg-purple foucs:outline-none text-white border border-gray-300  text-sm rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required />
+                <input type="text" onChange={(e) => qName.current = e.target.value} placeholder='Enter Quiz Name' className="w-80 m-8 bg-purple border foucs:outline-none text-white border-gray-300 text-sm rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required />
+
                 <button
+                    className='p-3 bg-purple mx-5'
                     onClick={() => {
                         createQuiz()
                     }} >Confirm</button>
@@ -157,43 +161,30 @@ const QuizSetter = ({ admin }) => {
         const questionsArray = new Array(questionsCount).fill(0);
 
         return (
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    margin: "50px"
-                }}
-
-            >
+            <div>
                 <h1>Quiz Name : {quizName}</h1>
                 <form id='my-form'>
                     <div>
-
-
                         {questionsArray.map((item, i) => (
-                            <div key={i}>
-                                <h1 >Question{i + 1}</h1>
-                                <input type='text' style={{ width: "80vw", height: "7vh" }}></input>
+                            <div key={i} className='flex m-9 flex-col justify-center items-center align-content-center'>
+                                <h1 className='text-xl'>Question{i + 1}</h1>
+                                <input type='text' style={{ width: "70vw", height: "7vh" }} className={inputStyle}></input>
                                 <br />
-                                <input type="text" placeholder="Enter option value" />
+                                <input type="text" placeholder="Enter option value" className={inputStyle}/>
                                 <br />
-                                <input type="text" placeholder="Enter option value" />
+                                <input type="text" placeholder="Enter option value" className={inputStyle}/>
                                 <br />
-                                <input type="text" placeholder="Enter option value" />
+                                <input type="text" placeholder="Enter option value" className={inputStyle}/>
                                 <br />
-                                <input type="text" placeholder="Enter option value" />
+                                <input type="text" placeholder="Enter option value" className={inputStyle}/>
                                 <br />
-                                <input type="number" placeholder='Enter correct option num' style={{ margin: "12px 0px" }} />
+                                <input type="number" placeholder='Enter correct option num' style={{ margin: "12px 0px", width: '200px' }} className={inputStyle} />
 
                             </div>
                         ))}
                     </div>
                     <button
-                        style={{
-                            padding: "20px"
-                        }}
+                        className='p-3 bg-purple mx-5 my-5'
                         onClick={updateForm}
                     >Sumbit Questionaire</button>
                 </form>
