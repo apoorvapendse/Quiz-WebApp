@@ -6,7 +6,7 @@
   - ### Register / Login as Admin to:
     - Get a dashboard to monitor quiz data.
     - Create quizes.
-    - Monitor the attempters score and email who attempted quizzes set by you.
+    - Monitor the attempters score and email of quizzes set by you.
     - Download CSV file containing data of attempters and their scores for every quiz you create.
     - Share your quiz code for others to attempt.
       
