@@ -162,7 +162,7 @@ const QuizSetter = ({ admin }) => {
 
         return (
             <div>
-                <h1>Quiz Name : {quizName}</h1>
+                <h1 className='flex justify-center p-4 text-4xl bg-dark-purple'>Quiz Name : {quizName}</h1>
                 <form id='my-form'>
                     <div>
                         {questionsArray.map((item, i) => (

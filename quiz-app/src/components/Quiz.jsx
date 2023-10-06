@@ -87,10 +87,10 @@ const Quiz = ({ user, quizObj, adminID, quizID }) => {
     }
     return (
         <>
-            <h1 className='text-3xl font-bold underline'>Quiz</h1>
-            <form onSubmit={submitHandler} style={{ height: "100vh", width: "100vw", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+        <h1 className='flex justify-center p-4 text-4xl bg-dark-purple'>Quiz</h1>
+            <form onSubmit={submitHandler} className='flex flex-col items-center h-screen justify-center'>
                 {currentQuestionIndex >= 0 && currentQuestionIndex < questionsArray.length && (
-                    <div key={currentQuestionIndex} className='m-10'>
+                    <div key={currentQuestionIndex} className='m-10 space-y-4 flex flex-col items-center justify-center'>
                         <h3 className=' font-extrabold  text-2xl'>Question {currentQuestionIndex + 1}</h3>
                         <p className=' text-xl'>{questionsArray[currentQuestionIndex].content}</p>
                         <div className="question">
@@ -142,10 +142,10 @@ const Quiz = ({ user, quizObj, adminID, quizID }) => {
                     </div>
                 )}
                 <div className="flex justify-between border-red-950  w-40 h-17" >
-                    <button onClick={goToPrevQuestion} disabled={currentQuestionIndex === 0} type='button' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  rounded'>prev</button>
-                    <button onClick={goToNextQuestion} disabled={currentQuestionIndex === questionsArray.length - 1} type='button' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  rounded'>next</button>
+                    <button onClick={goToPrevQuestion} disabled={currentQuestionIndex === 0} type='button' className='w-80 m-2 bg-purple border foucs:outline-none text-white border-gray-300 text-sm rounded-lg p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white'>prev</button>
+                    <button onClick={goToNextQuestion} disabled={currentQuestionIndex === questionsArray.length - 1} type='button' className='w-80 m-2 bg-purple border foucs:outline-none text-white border-gray-300 text-sm rounded-lg p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white'>next</button>
                 </div>
-                <button type='submit' className=' p-3 rounded-sm  m-5 bg-cyan-300'>Submit answers</button>
+                <button type='submit' className='m-2 bg-dark-purple border-none outline-none text-white text-sm rounded-lg p-2.5 dark:text-white'>Submit answers</button>
             </form>
         </>
     );
