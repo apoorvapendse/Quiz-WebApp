@@ -44,10 +44,10 @@ const UserCodeEntry = ({ user }) => {
 
 
         return (
-            <div style={{ height: "100vh", width: "100vw", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
-                <h1>Enter Code</h1>
-                <input type="text" placeholder='Enter the quiz code' className='text-center border-2 border-y-light-purple w-3/12 text-black' />
-                <button onClick={getQuiz} className=' p-2 bg-light-purple text-emerald-50 font-bold hover: bg m-2'>Enter Quiz</button>
+            <div className='flex flex-col items-center h-screen justify-center '>
+                <h1 className='flex justify-center p-6 text-4xl'>Enter Code</h1>
+                <input type="text" placeholder='Enter the quiz code' className='m-3 bg-purple foucs:outline-none text-white border border-gray-300  text-sm rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white w-3/12' />
+                <button onClick={getQuiz} className=' p-3 bg-purple mx-5'>Enter Quiz</button>
             </div>
         )
     }
