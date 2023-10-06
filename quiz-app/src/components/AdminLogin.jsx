@@ -49,7 +49,7 @@ const AdminLogin = ({ admin, setAdmin }) => {
                     <span className="card-side after:before:text-white"></span>
                     <div className="flip-card__inner">
                         <div className="flip-card__front">
-                            <div className="title">Log in</div>
+                            <div className="title text-white" >Log in</div>
                             <form className="flip-card__form" onSubmit={loginHandler}>
                                 <input
                                     className="flip-card__input"
@@ -71,7 +71,7 @@ const AdminLogin = ({ admin, setAdmin }) => {
                             </form>
                         </div>
                         <div className="flip-card__back">
-                            <div className="title">Sign up</div>
+                            <div className="title text-white">Sign up</div>
                             <form className="flip-card__form" onSubmit={signUpHandler}>
                                 <input
                                     className="flip-card__input"

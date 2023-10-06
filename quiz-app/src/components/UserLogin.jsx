@@ -50,7 +50,7 @@ const UserLogin = ({ user, setUser }) => {
                     <span className="card-side"></span>
                     <div className="flip-card__inner">
                         <div className="flip-card__front">
-                            <div className="title">Log in</div>
+                            <div className="title text-white">Log in</div>
                             <form className="flip-card__form" onSubmit={loginHandler}>
                                 <input
                                     className="flip-card__input"

@@ -124,7 +124,7 @@ const AdminDashboard = ({ admin }) => {
 
         return (
             <>
-            <h1 className='flex justify-center p-4 text-4xl bg-dark-purple'>AdminDashboard</h1>
+                <h1 className='flex justify-center p-4 text-4xl bg-dark-purple'>AdminDashboard</h1>
                 <div className='flex justify-center my-8'>
                     <button className='p-3 bg-purple mx-5' onClick={() => addQuiz()}>Create Quiz </button>
                     <button className='p-3 bg-purple mx-5' onClick={() => addAdmin()}>Add Admin</button>

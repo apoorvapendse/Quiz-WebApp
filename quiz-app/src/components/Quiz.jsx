@@ -86,9 +86,9 @@ const Quiz = ({ user, quizObj, adminID, quizID }) => {
         )
     }
     return (
-        <>
+        <div className=' overflow-x-hidden overflow-y-hidden'>
             <h1 className='text-3xl font-bold underline'>Quiz</h1>
-            <form onSubmit={submitHandler} style={{ height: "100vh", width: "100vw", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+            <form onSubmit={submitHandler} style={{ height: "93vh", width: "100vw", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
                 {currentQuestionIndex >= 0 && currentQuestionIndex < questionsArray.length && (
                     <div key={currentQuestionIndex} className='m-10'>
                         <h3 className=' font-extrabold  text-2xl'>Question {currentQuestionIndex + 1}</h3>
@@ -96,17 +96,20 @@ const Quiz = ({ user, quizObj, adminID, quizID }) => {
                         <div className="question">
                             <label>
                                 <input
+
                                     type="radio"
                                     name={`option${currentQuestionIndex}`}
                                     value="option1"
                                     onChange={() => handleOptionSelect(currentQuestionIndex, "option1")}
                                     checked={selectedOptions[currentQuestionIndex] === "option1"}
+
                                 />{" "}
                                 {questionsArray[currentQuestionIndex].option1}
                             </label>
                             <br />
                             <label>
                                 <input
+                                    className=""
                                     type="radio"
                                     name={`option${currentQuestionIndex}`}
                                     value="option2"
@@ -118,6 +121,7 @@ const Quiz = ({ user, quizObj, adminID, quizID }) => {
                             <br />
                             <label>
                                 <input
+                                    className=""
                                     type="radio"
                                     name={`option${currentQuestionIndex}`}
                                     value="option3"
@@ -129,6 +133,7 @@ const Quiz = ({ user, quizObj, adminID, quizID }) => {
                             <br />
                             <label>
                                 <input
+                                    className=""
                                     type="radio"
                                     name={`option${currentQuestionIndex}`}
                                     value="option4"
@@ -141,13 +146,13 @@ const Quiz = ({ user, quizObj, adminID, quizID }) => {
                         <hr />
                     </div>
                 )}
-                <div className="flex justify-between border-red-950  w-40 h-17" >
-                    <button onClick={goToPrevQuestion} disabled={currentQuestionIndex === 0} type='button' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  rounded'>prev</button>
-                    <button onClick={goToNextQuestion} disabled={currentQuestionIndex === questionsArray.length - 1} type='button' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  rounded'>next</button>
+                <div className="flex justify-between border-red-950  w-40 h-17 " >
+                    <button onClick={goToPrevQuestion} disabled={currentQuestionIndex === 0} type='button' className=' bg-light-purple hover:bg-dark-purple cursor-pointer text-white font-bold py-2 px-4  rounded'>prev</button>
+                    <button onClick={goToNextQuestion} disabled={currentQuestionIndex === questionsArray.length - 1} type='button' className=' bg-light-purple hover:bg-dark-purple text-white font-bold py-2 px-4  rounded'>next</button>
                 </div>
-                <button type='submit' className=' p-3 rounded-sm  m-5 bg-cyan-300'>Submit answers</button>
+                <button type='submit' className=' p-3 rounded-sm  m-5 bg-white text-light-purple font-bold'>Submit answers</button>
             </form>
-        </>
+        </div>
     );
 };
 
