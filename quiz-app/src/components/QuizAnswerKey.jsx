@@ -5,9 +5,10 @@ const QuizAnswerKey = ({ score, questionsArray, selectedOptions }) => {
     console.log()
     return (
         <>
-            <h1 className='text-2xl font-extrabold'>Your score was {score}/{questionsArray.length} </h1>
+        <h1 className='flex justify-center p-4 text-4xl'>Your score was {score}/{questionsArray.length} </h1>
+        <div className='flex'>
             {questionsArray.map((item, index) =>
-                <div className='ml-12'>
+                <div className='ml-12 w-full sm:w-1/3'>
                     <br />
                     <h3 className='text-xl'>{item.content}</h3>
                     <p className=' italic m-2'>{index + 1}.{item.option1}</p>
@@ -23,6 +24,7 @@ const QuizAnswerKey = ({ score, questionsArray, selectedOptions }) => {
                 </div>
             )}
 
+        </div>
         </>
 
     )

@@ -90,7 +90,7 @@ const Quiz = ({ user, quizObj, adminID, quizID }) => {
             <h1 className='text-3xl font-bold underline'>Quiz</h1>
             <form onSubmit={submitHandler} style={{ height: "93vh", width: "100vw", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
                 {currentQuestionIndex >= 0 && currentQuestionIndex < questionsArray.length && (
-                    <div key={currentQuestionIndex} className='m-10'>
+                    <div key={currentQuestionIndex} className='m-10 space-y-4 flex flex-col items-center justify-center'>
                         <h3 className=' font-extrabold  text-2xl'>Question {currentQuestionIndex + 1}</h3>
                         <p className=' text-xl'>{questionsArray[currentQuestionIndex].content}</p>
                         <div className="question">
