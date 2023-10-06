@@ -1,4 +1,4 @@
-![image](https://github.com/apoorvapendse/Quiz-WebApp/assets/102853901/b98d7c20-713b-4f31-9181-e6c898cd4201)# Quiz-WebApp
+# Quiz-WebApp
 ### Full Stack quiz app made using React, Firebase and Tailwind 
 <hr/>
 
