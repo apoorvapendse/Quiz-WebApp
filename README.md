@@ -11,8 +11,8 @@
     - Share your quiz code for others to attempt.
       
   - ### Register / Login as Quiz Attempter to:
-  -  Enter reference quiz code to be able to give the quiz.
-  -  See the answer key along with score and chosen options after submitting.
+    - Enter reference quiz code to be able to give the quiz.
+    - See the answer key along with score and chosen options after submitting.
 <hr/>
 
 # Preview
