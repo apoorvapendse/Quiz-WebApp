@@ -4,9 +4,6 @@ import { app } from '../../firebase';
 import Quiz from './Quiz';
 
 const UserCodeEntry = ({ user }) => {
-
-
-
     const firestore = getFirestore(app)
 
     const admin_id = useRef(0);
@@ -37,12 +34,8 @@ const UserCodeEntry = ({ user }) => {
 
     if (renderQuiz === true) {
         return <Quiz quizObj={quizInfo} user={user} adminID={admin_id.current} quizID={quiz_id.current} />
-
-
     }
     else {
-
-
         return (
             <div className='flex flex-col items-center h-screen justify-center '>
                 <h1 className='flex justify-center p-6 text-4xl'>Enter Code</h1>
