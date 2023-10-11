@@ -113,7 +113,7 @@ const AdminDashboard = ({ admin }) => {
             Create Quiz{" "}
           </button>
           <button className="p-3 bg-purple mx-5" onClick={() => addAdmin()}>
-            Add Admin
+            Refresh List
           </button>
         </div>
 
